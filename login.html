@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <link rel="stylesheet" href="style.css">
+    <style>
+      /* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo geral da página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilo do container de login */
+.login-container {
+    background-color: #333;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Título da página */
+h2 {
+    margin-bottom: 20px;
+    color: #8a2be2; /* Roxo suave */
+}
+
+/* Estilo dos campos de input */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Rótulos dos campos */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilo dos inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+}
+
+/* Botão de login */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #8a2be2; /* Roxo suave */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover no botão de login */
+.login-button:hover {
+    background-color: #7a1ea1;
+}
+
+/* Links de rodapé (esqueceu a senha) */
+.footer-links {
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: #8a2be2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+      
+    </style>
+                <!-- Efeito de Estrelas -->
+            <div class="stars" id="stars"></div>
+        </div>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login Cosmic Painel</h2>
+        <form id="loginForm" class="login-form">
+            <div class="input-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="login-button">Entrar</button>
+            </div>
+            <div class="footer-links">
+                <a href="News.html">Nao tem um login?</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Impede o envio do formulário
+
+            // Pega os valores dos campos de login e senha
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Verifica se as credenciais estão corretas
+            if (username === "glasupport" && password === "8090") {
+                // Armazena no localStorage que o usuário está logado
+                localStorage.setItem("isLoggedIn", "true");
+
+                // Redireciona para a página inicial, caso as credenciais estejam corretas
+                window.location.href = "index.html";  // Substitua "index.html" pela página inicial desejada
+            } else {
+                alert("Usuário ou senha incorretos!");
+            }
+        });
+                // Criar estrelas
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            starsContainer.innerHTML = ''; // Limpa estrelas existentes
+            
+            const numberOfStars = 200;
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Tamanho aleatório entre 1px e 4px
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posição aleatória em toda a viewport
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                
+                // Animação com variação
+                star.style.animationDuration = `${Math.random() * 4 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+    </script>
+</body>
+</html>

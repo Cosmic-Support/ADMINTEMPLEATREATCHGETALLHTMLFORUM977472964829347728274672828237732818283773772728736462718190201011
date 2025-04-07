@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Painel - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Menu Hambúrguer -->
+    <div class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://upload.carisys.online/files/gsnupi.jpeg" alt="Logo" class="sidebar-logo">
+            <h3>Cosmic Painel</h3>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <a href="#" class="active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="News.html">
+                <i class="fas fa-newspaper"></i>
+                <span>Noticias</span>
+            </a>
+            <a onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <h2>Dashboard</h2>
+            <div class="user-area">
+                <span>🔧  Made By Akira And Raro</span>
+            </div>
+        </header>
+
+        <!-- Conteúdo -->
+        <div class="content-wrapper">
+            <!-- Bem-vindo -->
+            <div class="welcome-message">
+                <h3>Bem-vindo ao Painel Cosmic!</h3>
+                <p>Selecione uma opção no menu lateral para começar.</p>
+            </div>
+            
+            <!-- Efeito de Estrelas -->
+            <div class="stars" id="stars"></div>
+        </div>
+    </main>
+
+    <script>
+        // Verificar login
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem("isLoggedIn")) {
+                window.location.href = "login.html";
+            }
+        });
+
+        // Função de logout
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "login.html";
+        }
+
+        // Função para alternar sidebar
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Adicionar evento para fechar sidebar ao clicar no overlay
+        document.querySelector('.sidebar-overlay').addEventListener('click', toggleSidebar);
+
+        // Criar estrelas
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            starsContainer.innerHTML = ''; // Limpa estrelas existentes
+            
+            const numberOfStars = 200;
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Tamanho aleatório entre 1px e 4px
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posição aleatória em toda a viewport
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                
+                // Animação com variação
+                star.style.animationDuration = `${Math.random() * 4 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Chama a função quando a página carrega e quando redimensiona
+        window.addEventListener('load', createStars);
+        window.addEventListener('resize', createStars);
+
+        // Função de alternância de tema (básica)
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
